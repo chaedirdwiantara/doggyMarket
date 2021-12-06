@@ -8,7 +8,7 @@ import {
   BackHandler,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { getDogImages, getDogLists } from "../../actions/DogDatasAction";
+import { getDogLists } from "../../actions/DogDatasAction";
 import ModalPicture from "../../components/Besar/ModalPicture";
 import SearchData from "../../components/Kecil/SearchData";
 import { chunk } from "../../utils";
@@ -28,7 +28,7 @@ const Home = () => {
 
   //MODAL SETUP
   const [modalVisible, setModalVisible] = useState(false);
-  // close modal action if back button click
+  const [sentDataToModal, setSentDataToModal] = useState("");
   const closeModalBack = () => {
     if (modalVisible != false) {
       setModalVisible(!modalVisible);
@@ -36,8 +36,6 @@ const Home = () => {
     }
     return false;
   };
-
-  // Listener back button
   useEffect(() => {
     BackHandler.addEventListener("hardwareBackPress", closeModalBack);
 
@@ -62,6 +60,7 @@ const Home = () => {
           <TouchableOpacity
             onPress={() => {
               setModalVisible(!modalVisible);
+              setSentDataToModal(item);
             }}
           >
             <Text>{item.toUpperCase()}</Text>
@@ -71,6 +70,7 @@ const Home = () => {
       <ModalPicture
         open={modalVisible}
         onClose={() => setModalVisible(!modalVisible)}
+        data={sentDataToModal}
       />
     </View>
   );

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { StyleSheet, Text } from "react-native";
 import { Modal, Button } from "@ui-kitten/components";
 import {
@@ -6,8 +7,27 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { ms, mvs } from "react-native-size-matters";
+import { getDogImages, getDogSubLists } from "../../actions/DogDatasAction";
 
-const ModalPicture = ({ open, onClose }) => {
+const ModalPicture = ({ open, onClose, data }) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (data != "") {
+      dispatch(getDogImages(data));
+      dispatch(getDogSubLists(data));
+    }
+  }, [data, dispatch]);
+
+  const DogImage = useSelector(
+    (state) => state.DogImagesReducer.getDogsImageResult
+  );
+  const DogSubLists = useSelector(
+    (state) => state.DogListsReducer.getDogsSubListResult
+  );
+  console.log(DogSubLists, "DogSubLists");
+  // console.log(DogImage, "DogImage");
+
   return (
     <Modal
       visible={open}
