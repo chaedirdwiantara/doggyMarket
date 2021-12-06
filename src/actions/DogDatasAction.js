@@ -25,7 +25,8 @@ export const getDogImages = () => {
           dispatchSuccess(
             dispatch,
             GET_DOGS_IMAGE,
-            response.data ? response.data.message : []
+            response.data ? response.data.message : [],
+            console.log(response, "response dog image")
           );
         }
       })
@@ -58,7 +59,8 @@ export const getDogLists = () => {
           dispatchSuccess(
             dispatch,
             GET_DOG_LISTS,
-            response.data ? response.data.message : []
+            response.data ? response.data.message : [],
+            console.log(response, "response dog list")
           );
         }
       })
