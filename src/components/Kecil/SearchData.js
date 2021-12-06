@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, TextInput } from "react-native";
 
 const SearchData = ({ onChange }) => {
-  const [search, setSearch] = useState("");
   return <TextInput placeholder="search..." onChangeText={onChange} />;
 };
 

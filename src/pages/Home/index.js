@@ -59,7 +59,11 @@ const Home = () => {
         })}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setModalVisible(!modalVisible);
+            }}
+          >
             <Text>{item.toUpperCase()}</Text>
           </TouchableOpacity>
         )}

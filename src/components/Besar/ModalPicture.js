@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, Text, Modal, Button } from "react-native";
+import { StyleSheet, Text } from "react-native";
+import { Modal, Button } from "@ui-kitten/components";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
