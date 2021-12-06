@@ -10,26 +10,13 @@ export const getDogImages = () => {
     // LOADING
     dispatchLoading(dispatch, GET_DOGS_IMAGE);
 
-    axios({
-      method: "get",
-      url: API_DOG_PICTURES,
-      timeout: API_TIMEOUT,
-    })
-      .then((response) => {
-        if (response.status !== 200) {
-          // ERROR
-
-          dispatchError(dispatch, GET_DOGS_IMAGE, response);
-        } else {
-          // BERHASIL
-          dispatchSuccess(
-            dispatch,
-            GET_DOGS_IMAGE,
-            response.data ? response.data.message : [],
-            console.log(response, "response dog image")
-          );
-        }
+    fetch(API_DOG_PICTURES)
+      .then((response) => response.json())
+      .then((json) => {
+        // BERHASIL
+        dispatchSuccess(dispatch, GET_DOGS_IMAGE, json.message);
       })
+
       .catch((error) => {
         // ERROR
         dispatchError(dispatch, GET_DOGS_IMAGE, error);
@@ -44,25 +31,11 @@ export const getDogLists = () => {
     // LOADING
     dispatchLoading(dispatch, GET_DOG_LISTS);
 
-    axios({
-      method: "get",
-      url: API_DOG_LIST,
-      timeout: API_TIMEOUT,
-    })
-      .then((response) => {
-        if (response.status !== 200) {
-          // ERROR
-
-          dispatchError(dispatch, GET_DOG_LISTS, response);
-        } else {
-          // BERHASIL
-          dispatchSuccess(
-            dispatch,
-            GET_DOG_LISTS,
-            response.data ? response.data.message : [],
-            console.log(response, "response dog list")
-          );
-        }
+    fetch(API_DOG_LIST)
+      .then((response) => response.json())
+      .then((json) => {
+        // BERHASIL
+        dispatchSuccess(dispatch, GET_DOG_LISTS, json.message);
       })
       .catch((error) => {
         // ERROR
