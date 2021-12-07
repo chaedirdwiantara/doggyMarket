@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, View, FlatList, Image, Text } from "react-native";
 import { Modal, Button } from "@ui-kitten/components";
 import {
   widthPercentageToDP as wp,
@@ -8,6 +8,7 @@ import {
 } from "react-native-responsive-screen";
 import { ms, mvs } from "react-native-size-matters";
 import { getDogImages, getDogSubLists } from "../../actions/DogDatasAction";
+import Gap from "../Kecil/Gap";
 
 const ModalPicture = ({ open, onClose, data }) => {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const ModalPicture = ({ open, onClose, data }) => {
   const DogSubLists = useSelector(
     (state) => state.DogListsReducer.getDogsSubListResult
   );
-  console.log(DogSubLists, "DogSubLists");
+  // console.log(DogSubLists, "DogSubLists");
   // console.log(DogImage, "DogImage");
 
   return (
@@ -37,11 +38,45 @@ const ModalPicture = ({ open, onClose, data }) => {
       onBackdropPress={onClose}
       backdropStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
     >
-      <Text style={styles.modalTxt}>Nama Anjing</Text>
-      <Text style={styles.modalTxt2}>Nama Sub Anjing</Text>
-      <Button style={styles.button} onPress={onClose}>
-        Saya mengerti
-      </Button>
+      <FlatList
+        data={DogImage}
+        horizontal={false}
+        numColumns={2}
+        columnWrapperStyle={{ justifyContent: "space-between" }}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => (
+          <View style={styles.imgContainer}>
+            <Image source={{ uri: item }} style={styles.gambar} />
+          </View>
+        )}
+      />
+      {DogSubLists.length >= 1 ? (
+        <>
+          <Gap height={15} />
+          <View style={styles.subListContainer}>
+            <FlatList
+              data={DogSubLists}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item }) => (
+                <View style={styles.textContainer}>
+                  <Text
+                    style={{
+                      color: "#60AF20",
+                      fontWeight: "bold",
+                      alignSelf: "center",
+                    }}
+                  >
+                    {item.toUpperCase()}
+                  </Text>
+                </View>
+              )}
+            />
+          </View>
+        </>
+      ) : null}
     </Modal>
   );
 };
@@ -51,24 +86,36 @@ export default ModalPicture;
 const styles = StyleSheet.create({
   modalStyle: {
     backgroundColor: "white",
-    height: hp("65%"),
+    height: hp("70%"),
     width: wp("92%"),
     borderRadius: 20,
-    justifyContent: "space-evenly",
+    alignItems: "center",
+    padding: 15,
+  },
+  imgContainer: {
+    marginBottom: 15,
+    marginHorizontal: mvs(7),
     alignItems: "center",
   },
-  modalTxt: {
-    fontSize: mvs(17),
-    alignSelf: "center",
-    fontWeight: "bold",
+  gambar: {
+    width: ms(140),
+    height: mvs(90),
+    borderRadius: 10,
+    // resizeMode: "contain",
   },
-  modalTxt2: {
-    textAlign: "center",
-    alignSelf: "center",
-    lineHeight: mvs(22),
-    maxWidth: ms(290),
+  subListContainer: {
+    height: "10%",
+    paddingVertical: 5,
   },
-  button: {
-    paddingHorizontal: ms(30),
+  textContainer: {
+    backgroundColor: "#F3F9EE",
+    // width: ms(120),
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#60AF20",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: ms(20),
+    marginHorizontal: mvs(4),
   },
 });

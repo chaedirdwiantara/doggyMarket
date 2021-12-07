@@ -7,6 +7,7 @@ import {
   View,
   BackHandler,
 } from "react-native";
+import { ms, mvs } from "react-native-size-matters";
 import { useDispatch, useSelector } from "react-redux";
 import { getDogLists } from "../../actions/DogDatasAction";
 import ModalPicture from "../../components/Besar/ModalPicture";
@@ -55,6 +56,10 @@ const Home = () => {
             return items;
           }
         })}
+        horizontal={false}
+        numColumns={2}
+        columnWrapperStyle={{ justifyContent: "space-between" }}
+        showsVerticalScrollIndicator={false}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
           <TouchableOpacity
@@ -62,8 +67,11 @@ const Home = () => {
               setModalVisible(!modalVisible);
               setSentDataToModal(item);
             }}
+            style={styles.touchable}
           >
-            <Text>{item.toUpperCase()}</Text>
+            <Text style={{ color: "white", fontWeight: "bold" }}>
+              {item.toUpperCase()}
+            </Text>
           </TouchableOpacity>
         )}
       />
@@ -84,6 +92,16 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "white",
+    // backgroundColor: "yellow",
+  },
+  touchable: {
+    backgroundColor: "#60AF20",
+    width: ms(160),
+    borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: ms(15),
+    marginBottom: mvs(10),
+    marginHorizontal: mvs(4),
   },
 });
