@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { StyleSheet, View, FlatList, Image, Text } from "react-native";
-import { Modal, Button } from "@ui-kitten/components";
+import { StyleSheet, View, FlatList, Text } from "react-native";
+import { Modal } from "@ui-kitten/components";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -9,6 +9,7 @@ import {
 import { ms, mvs } from "react-native-size-matters";
 import { getDogImages, getDogSubLists } from "../../actions/DogDatasAction";
 import Gap from "../Kecil/Gap";
+import ExpoFastImage from "expo-fast-image";
 
 const ModalPicture = ({ open, onClose, data }) => {
   const dispatch = useDispatch();
@@ -47,7 +48,11 @@ const ModalPicture = ({ open, onClose, data }) => {
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
           <View style={styles.imgContainer}>
-            <Image source={{ uri: item }} style={styles.gambar} />
+            <ExpoFastImage
+              source={{ uri: item }}
+              cacheKey={item}
+              style={styles.gambar}
+            />
           </View>
         )}
       />
