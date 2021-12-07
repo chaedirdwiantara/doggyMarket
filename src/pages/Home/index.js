@@ -11,6 +11,7 @@ import { ms, mvs } from "react-native-size-matters";
 import { useDispatch, useSelector } from "react-redux";
 import { getDogLists } from "../../actions/DogDatasAction";
 import ModalPicture from "../../components/Besar/ModalPicture";
+import Gap from "../../components/Kecil/Gap";
 import SearchData from "../../components/Kecil/SearchData";
 import { chunk } from "../../utils";
 
@@ -48,6 +49,12 @@ const Home = () => {
   return (
     <View style={styles.pages}>
       <SearchData onChange={(text) => setSearch(text)} />
+      <View style={styles.titleContainer}>
+        <Text style={{ color: "#60AF20", fontWeight: "bold", fontSize: 20 }}>
+          DOGS GALLERY
+        </Text>
+      </View>
+      <Gap height={15} />
       <FlatList
         data={Dogs?.filter((items) => {
           if (search == "") {
@@ -103,5 +110,8 @@ const styles = StyleSheet.create({
     padding: ms(15),
     marginBottom: mvs(10),
     marginHorizontal: mvs(4),
+  },
+  titleContainer: {
+    backgroundColor: "white",
   },
 });

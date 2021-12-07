@@ -106,7 +106,6 @@ const styles = StyleSheet.create({
     width: ms(140),
     height: mvs(90),
     borderRadius: 10,
-    // resizeMode: "contain",
   },
   subListContainer: {
     height: "10%",
@@ -114,7 +113,6 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     backgroundColor: "#F3F9EE",
-    // width: ms(120),
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "#60AF20",
