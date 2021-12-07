@@ -7,7 +7,7 @@ const SearchData = ({ onChange }) => {
     <View style={styles.container}>
       <View style={styles.searchSection}>
         <TextInput
-          placeholder="search..."
+          placeholder="Search..."
           onChangeText={onChange}
           style={styles.input}
         />
@@ -31,13 +31,14 @@ const styles = StyleSheet.create({
     // flex: 1,
     backgroundColor: "#F7F9FC",
     borderRadius: 5,
-    borderColor: "#EDF1F7",
+    borderColor: "#60AF20",
     borderWidth: 1,
     paddingVertical: 10,
-    paddingLeft: 10,
+    paddingLeft: 15,
     alignItems: "center",
   },
   input: {
     fontSize: 16,
+    width: "100%",
   },
 });
